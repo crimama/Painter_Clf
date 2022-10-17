@@ -53,15 +53,15 @@ def Save_record(record):
 if __name__ == "__main__":
 
     cfg = edict({
-        'img_size' : 320,
-        'batch_size' :16 ,
+        'img_size' : 384,
+        'batch_size' :4,
         'train_ratio' : 0.8, 
         'num_epochs' : 30, 
-        'num_fold' : 5, 
-        'model_name' : 'efficientnet_b4',
+        'num_fold' : 1, 
+        'model_name' : 'cait_s36_384',
         'lr' : 1e-4, 
         'device' : 'cuda:0',
-        'save_path' : './Save_models/skfold_effb4/',
+        'save_path' : './Save_models/cait_s36/',
         'seed' : 41 ,
         'crop_ratio' : 0.5 
     })
@@ -109,8 +109,13 @@ if __name__ == "__main__":
                     torch.save(model,cfg.save_path + f'{k}_fold_best.pt')
             else:
                 if acc_valid > best:
+                    best = acc_valid 
                     torch.save(model,cfg.save_path + f'{k}_fold_best.pt')
                     print(f'Best_save{epoch}')
+
+        save_record = pd.DataFrame(record)
+        save_record.columns = ['fold','epoch_loss','Acc','Valid_epoch_loss','Valid_acc']
+        save_record.to_csv(f'{cfg.save_path}record.csv')
 
     df = pd.DataFrame(cfg.values()).T
     df.columns = cfg.keys() 
