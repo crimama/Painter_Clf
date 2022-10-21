@@ -53,12 +53,12 @@ def Save_record(record):
 if __name__ == "__main__":
 
     cfg = edict({
-        'img_size' : 384,
+        'img_size' : 256,
         'batch_size' :4,
         'train_ratio' : 0.8, 
         'num_epochs' : 30, 
         'num_fold' : 1, 
-        'model_name' : 'cait_s36_384',
+        'model_name' : 'efficientnet_b0',
         'lr' : 1e-4, 
         'device' : 'cuda:0',
         'save_path' : './Save_models/cait_s36/',
