@@ -12,7 +12,8 @@ import pandas as pd
 from easydict import EasyDict as edict
 import json 
 import cv2 
-
+import sys 
+sys.path.append('../../utils')
 
 import torch 
 import torch.nn as nn 
@@ -28,6 +29,7 @@ from utils import Model
 from sklearn.metrics import f1_score
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
+
 
 
 def seed_everything(seed):
